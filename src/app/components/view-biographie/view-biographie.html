@@ -1,0 +1,85 @@
+<a
+     routerLink="/biographie"
+     class="mb-6 inline-flex items-center gap-2 rounded-md px-4 py-2
+            text-sm font-medium text-foreground
+            hover:bg-yellow-600 transition-colors"
+   >
+     <lucide-icon [name]="ArrowLeft" class="h-4 w-4"></lucide-icon>
+     Retour aux Biographies
+   </a>
+   @if (biographie()) {
+       <div class=" flex flex-col p-2">
+           <div class="flex flex-col mb-3 md:flex-row md:items-start md:justify-between gap-4">
+       
+               <!-- Image de l'auteur -->
+               <div class="flex-shrink-0">
+                 <img 
+                   [src]=" environment+ biographie().image" 
+                   alt="{{ biographie().nom_complet }}" 
+                   class="w-32 h-32 border border-green-900 rounded-full object-cover mb-4 md:mb-0"
+                 />
+               </div>
+       
+       
+               <!-- Informations principales -->
+               <div class="flex-1">
+                 <!-- <h3 class="font-heading text-xl font-semibold text-foreground mb-2">
+                   {{ item.nom_complet }}
+                 </h3> -->
+       
+                 <div class="flex flex-wrap items-center gap-4 text-sm text-green-900 mb-3">
+                   <div class="flex items-center gap-1">
+                     <ng-icon name="lucideUser" class="h-4 w-4"></ng-icon>
+                     <span class="uppercase font-bold">{{ biographie().author || biographie().nom_complet }}</span>
+                   </div>
+       
+                  
+                 </div>
+                 <div class="flex flex-wrap items-center gap-4 text-sm text-green-900 mb-3">
+                   <ng-icon name="lucideCalendar" class="h-4 w-4"></ng-icon>
+                   <span class="text-green-900 mb-1">Né : {{ biographie().date_naissance }}</span>
+                   </div>
+                   @if(biographie().mort!=='null' && biographie().mort!=='') {
+                 <div class="flex flex-wrap items-center gap-4 text-sm text-green-900 mb-3">
+                   <ng-icon name="lucideCalendar" class="h-4 w-4"></ng-icon>
+                   <span class="text-green-900 mb-1">Décédé : {{ biographie().mort }}</span>
+                   </div>
+                  }
+                 @if (biographie().nb_khalif!==0) {
+                     <p class="text-green-900 font-bold mb-1" >
+                       {{ biographie().nb_khalif }} {{ biographie().nb_khalif === 1 ? 'Khalife Général' : 'Khalifes Généraux' }}
+                     </p>
+                 }
+                  <!-- <div class="flex items-center text-green-900 gap-1">
+                     <ng-icon name="lucideTag" class="h-4 w-4"></ng-icon>
+                     <span class="line-clamp-1">{{ biographie().bio }}</span>
+                   </div>
+                 <p class="text-green-900 mt-2">{{ biographie().description }}</p> -->
+               </div>
+               
+             </div>
+                <div class="border bg-white border-gray-300 inset-shadow-2xs rounded-md p-8">
+                      <div class="animate-fade-in">
+                        <!-- <h2
+                          class="font-heading text-2xl font-bold text-foreground mb-6 decorative-border pt-6"
+                        >
+                          {{ currentSection.title }}
+                        </h2> -->
+            
+                        <div class="prose prose-lg max-w-none">
+                           @for (paragraph of biographie()?.bio?.split('\n\n'); track $index) {
+                               <div class="mb-4">
+                                   @for (line of paragraph.split('\n'); track $index) {
+                                   <p
+                                   
+                                       class="text-green-900 font-semibold leading-relaxed mb-2"
+                                       [innerHTML]="formatLine(line)"
+                                   ></p>
+                                   }
+                               </div>
+                           }
+                        </div>
+                      </div>
+                    </div>
+       </div>
+   }

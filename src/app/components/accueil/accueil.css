@@ -1,0 +1,19 @@
+.gradient-gold-text {
+  background: linear-gradient(
+    90deg,
+    #facc15,   /* gold clair */
+    #eab308,   /* gold moyen */
+    #ca8a04    /* gold foncé */
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+}

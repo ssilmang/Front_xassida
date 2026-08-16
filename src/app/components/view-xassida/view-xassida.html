@@ -1,0 +1,183 @@
+
+<!-- BACK BUTTON -->
+ <a
+     routerLink="/xassidas"
+     class="mb-6 inline-flex items-center gap-2 rounded-md px-4 py-2
+            text-lg font-medium text-foreground
+            hover:bg-yellow-600 transition-colors"
+   >
+     <lucide-icon [name]="ArrowLeft" class="h-4 w-4"></lucide-icon>
+     Retour aux Biographies
+   </a>
+
+
+@if (xassida(); as x) {
+
+  <!-- ═══════════════════════════════════════════
+       HERO HEADER
+  ═══════════════════════════════════════════ -->
+  <div class="manuscript-page">
+
+    <!-- Ornement haut -->
+    <div class="ornament-top">
+      <span class="ornament-line"></span>
+      <span class="ornament-diamond">◈</span>
+      <span class="ornament-line"></span>
+    </div>
+
+    <!-- BISMILLAH -->
+    <div class="bismillah-block">
+      <span class="bismillah-text">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ</span>
+    </div>
+
+    <!-- HEADER INFO -->
+    <div class="header-card mt-2">
+      <div class="header-author ">
+        @if (x.ecrivain.image) {
+          <div class="author-avatar">
+            <img [src]="environment + x.ecrivain.image"
+                 [alt]="x.ecrivain.nom_complet || 'Auteur'"
+                 class="avatar-img">
+            <div class="avatar-ring"></div>
+          </div>
+        }
+        <div class="author-info">
+          @if (x.ecrivain.nom_complet) {
+            <span class="author-name">{{ x.ecrivain.nom_complet }}</span>
+          }
+          <!-- <span class="author-role">الناظم</span> -->
+        </div>
+      </div>
+
+      <div class="header-divider"></div>
+
+      <div class="header-titles">
+        @if (x.wordingArabe) {
+          <h1 class="title-arabic">{{ x.wordingArabe }}</h1>
+        }
+        @if (x.wording) {
+          <h2 class="title-latin">{{ x.wording }}</h2>
+        }
+      </div>
+
+      @if (x.meta) {
+        <div class="meta-chips">
+          @if (x.meta.diwan) {
+            <span class="chip"><span class="chip-label">الديوان</span>{{ x.meta.diwan }}</span>
+          }
+          @if (x.meta.qafiya) {
+            <span class="chip chip-gold"><span class="chip-label">القافية</span>{{ x.meta.qafiya }}</span>
+          }
+          @if (x.meta.madih_li) {
+            <span class="chip"><span class="chip-label">الممدوح</span>{{ x.meta.madih_li }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         LECTEUR AUDIO
+    ═══════════════════════════════════════════ -->
+   @if (x.audio) {
+      <div class="player-card">
+        <div class="player-waveform">
+          @for (bar of waveBars; track $index) {
+            <div class="wave-bar"
+                 [class.active]="isBarActive($index)"
+                 [style.height.px]="bar"
+                 [style.animation-delay]="($index * 0.05) + 's'">
+            </div>
+          }
+        </div>
+
+
+        <div class="player-progress">
+          <span class="time-label">{{ formatTime(currentTime) }}</span>
+          <div class="progress-track" (click)="seekByClick($event)">
+            <div class="progress-fill" [style.width.%]="progress"></div>
+            <div class="progress-thumb" [style.left.%]="progress"></div>
+          </div>
+          <span class="time-label">{{ formatTime(duration) }}</span>
+        </div>
+
+
+        <div class="player-controls">
+          <button class="ctrl-btn ctrl-sm" (click)="rewind()" title="- 10s">
+            <ng-icon name="lucideRewind"></ng-icon>
+            <span class="ctrl-label">10s</span>
+          </button>
+
+          <button class="ctrl-btn ctrl-lg play-btn"
+                  (click)="togglePlay()"
+                  [class.is-playing]="playing">
+            <div class="play-ripple"></div>
+            <ng-icon [name]="playing ? 'lucidePause' : 'lucidePlay'"></ng-icon>
+          </button>
+
+          <button class="ctrl-btn ctrl-sm" (click)="forward()" title="+ 10s">
+            <ng-icon name="lucideFastForward"></ng-icon>
+            <span class="ctrl-label">10s</span>
+          </button>
+        </div>
+
+
+        <div class="player-volume">
+          <ng-icon name="lucideVolume2" class="vol-icon"></ng-icon>
+          <input type="range" min="0" max="1" step="0.01"
+                 class="vol-slider"
+                 [(ngModel)]="volume"
+                 (input)="setVolume($event)">
+        </div>
+      </div>
+    }
+
+    <!-- ═══════════════════════════════════════════
+         QASIDA VERSES
+    ═══════════════════════════════════════════ -->
+    @if (abiat().length > 0) {
+      <div class="qasida-section">
+
+        <div class="section-header">
+          <span class="section-line"></span>
+          <span class="section-title">القصيدة</span>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="abiat-container">
+          @for (bayt of abiat(); track $index) {
+            <div class="bayt" [class.bayt-even]="$index % 2 === 0">
+              <span class="bayt-num">{{ toArabicNum($index + 1) }}</span>
+              <div class="misra misra-awwal" [innerHTML]="bayt.awwal"></div>
+              <span class="bayt-sep">◈</span>
+              <div class="misra misra-thani" [innerHTML]="bayt.thani"></div>
+            </div>
+          }
+        </div>
+
+      </div>
+    } @else if (x.contenues) {
+      <!-- Fallback : texte brut si parsing échoue -->
+      <div class="contenu-brut" [innerHTML]="formatContenu(x.contenues)"></div>
+    }
+
+    <!-- ═══════════════════════════════════════════
+         PDF VIEWER
+    ═══════════════════════════════════════════ -->
+
+
+    <!-- Ornement bas -->
+    <!-- <div class="ornament-bottom">
+      <span class="ornament-line"></span>
+      <span class="closing-dua">صَلَّى اللهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ</span>
+      <span class="ornament-line"></span>
+    </div> -->
+
+  </div><!-- .manuscript-page -->
+
+} @else {
+  <!-- LOADING -->
+  <div class="loading-state">
+    <div class="loading-spinner"></div>
+    <p>جارٍ التحميل…</p>
+  </div>
+}

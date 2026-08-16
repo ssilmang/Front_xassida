@@ -1,0 +1,81 @@
+<div class="mb-10 mt-4">
+  <div class="flex items-center gap-3 mb-4">
+    <div class="w-12 h-12 rounded-lg bg-gray-800/10 text-green-800 flex items-center justify-center">
+      <lucide-icon
+        [name]="BookOpen"
+        class="h-6 w-6 text-primary">
+      </lucide-icon>
+    </div>
+
+    <div>
+      <h1 class="font-heading text-3xl font-bold text-foreground">
+        Bibliothèque de Xassidas
+      </h1>
+      <p class="text-muted-foreground">
+        {{dataXassida().length}} poèmes disponibles
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="flex  flex-wrap gap-4">
+    @for (item of dataXassida(); track $index) {
+<div (click)="viewXassida(item)" 
+         (keydown.enter)="viewXassida(item)"
+            (keydown.space)="viewXassida(item)"
+            tabindex="0"
+            
+            aria-label="Voir le xassida {{ item.wording }}"
+class="w-74 cursor-pointer border border-gray-300 transform hover:scale-105 transition duration-300 inset-shadow-2xs py-2 bg-white rounded-lg  dark:bg-gray-800">
+    <div
+        class="group relative flex  items-center justify-between rounded-md  p-1 px-2 font-mono hover:border-0 hovers:ring-1 hover:ring-[#2ca4ab]">
+        <div class="flex w-full items-center aligns-items-center justify-center space-x-2">
+            <div class="flex justify-end right-0">
+                <span class="relative flex justify-end size-10 border border-green-800 shrink-0 overflow-hidden rounded-full ring-[#2ca4ab] group-hovers:ring-2">
+                   <img class="aspect-square size-full"
+                       [src]="environment.imagesUrl+ item.ecrivain.image">
+               </span>
+            </div>
+            <div class=" w-full">
+                <div class="w-full  ">
+                    <p class="truncate text-xs font-bold capitalize">{{item.wording}}</p>
+                    <div class="flex justify-end right-0 w-full">
+                        <p class="truncate flex justify-end text-xs font-bold capitalize">{{item.wordingArabe}}</p>
+                    </div>
+                </div>
+                <span class="text-xs capitalize text-green-900 group-hovers:text-[#2ca4ab]">{{item.ecrivain.nom_complet}}</span>
+            </div>
+           
+        </div>
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="transparent"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="">
+            <path
+                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+            </path>
+        </svg> -->
+    </div>
+</div>
+}
+
+
+   
+    <!-- <div
+        class="group relative flex cursor-pointer items-center justify-between rounded-md border border-gray-500 p-3 px-2 font-mono hover:border-0 hover:ring-1 hover:ring-[#2ca4ab]">
+        <div class="flex items-center space-x-2">
+            <span class="relative flex size-10 shrink-0 overflow-hidden rounded-full ring-[#2ca4ab] group-hover:ring-2">
+                <img class="aspect-square size-full"
+                    src="https://api.xassida.sn/storage/v1/object/public/images/authors/el_hadj_malick_sy_profile.png">
+            </span>
+            <div>
+                <p class="truncate text-xs font-bold capitalize">abada</p>
+                <span class="text-xs capitalize text-gray-500 group-hover:text-[#2ca4ab]">el hadj malick sy</span>
+            </div>
+        </div><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="transparent"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="">
+            <path
+                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+            </path>
+        </svg>
+    </div> -->
+</div>

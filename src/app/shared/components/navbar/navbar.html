@@ -1,1 +1,87 @@
-<p>navbar works!</p>
+<header class="sticky top-0 z-50 pl-4 pr-4 w-full border-b border-gray-300 bg-white/95 backdrop-blur">
+  <div class="container flex h-16 items-center justify-between">
+
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-2">
+      <div
+        class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-800 text-white"
+      >
+        <lucide-icon
+      [name]="BookOpenIcon"
+      class="h-5 w-5 text-white"
+    ></lucide-icon>
+      </div>
+      <span class="text-xl font-semibold">
+        Xassida<span class="text-yellow-600">Lib</span>
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-1">
+        @for (item of navigation; track $index) {
+            <a
+              [routerLink]="item.href"
+              routerLinkActive="bg-gray-800/10 text-green-800"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="px-4 py-2  text-sm font-medium rounded-lg hover:text-green-800 hover:bg-gray-800/10 "
+            >
+              {{ item.name }}
+            </a>
+        }
+    </nav>
+
+    <!-- Search Desktop -->
+     @if (showSearch) {
+       <div  class="hidden md:flex relative w-64">
+         <input
+           type="search"
+           placeholder="Rechercher..."
+           [(ngModel)]="searchQuery"
+           (ngModelChange)="handleSearch($event)"
+           class="w-full pl-4 pr-3 py-2 border border-gray-200 rounded-lg bg-gray-100 outline-none"
+         />
+       </div>
+     }
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="md:hidden p-2"
+      (click)="toggleMenu()"
+      aria-label="Menu"
+    >
+    @if (isMenuOpen) {
+      <span >✕</span>
+    }@else {
+      <span >☰</span>
+    }
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isMenuOpen" class="md:hidden border-t bg-white">
+    <div class="container py-4 space-y-2">
+
+      <!-- Search Mobile -->
+      <div *ngIf="showSearch" class="mb-4">
+        <input
+          type="search"
+          placeholder="Rechercher..."
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="handleSearch($event)"
+          class="w-full pl-4 pr-3 py-2 rounded-lg bg-gray-100"
+        />
+      </div>
+
+      <a
+        *ngFor="let item of navigation"
+        [routerLink]="item.href"
+        routerLinkActive="bg-indigo-100 text-indigo-600"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeMenu()"
+        class="block px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black"
+      >
+        {{ item.name }}
+      </a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,76 @@
+<div class="min-h-screen flex flex-col">
+  <main class="flex-1 py-12">
+    <div class="container">
+
+      <!-- Page Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg  text-green-900 bg-gray-900/10 flex items-center justify-center">
+             <lucide-icon [name]="Compass" class="h-6 w-6  " />
+          </div>
+          <div>
+            <h1 class="font-heading text-3xl font-bold text-foreground">
+              Tarikha
+            </h1>
+            <p class="text-green-900">
+              Pratiques spirituelles et voie soufie
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-[280px_1fr] gap-8">
+
+        <!-- Sidebar -->
+        <div class="space-y-2">
+            @for (section of sections; track $index) {
+                <button             
+                  (click)="setActiveSection(section.id)"
+                  class="w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-all"
+                  [ngClass]="{
+                    'bg-green-900 text-white shadow-card': activeSectionId === section.id,
+                    'bg-gray-200/50 text-green-900 hover:bg-gray-200 hover:text-black': activeSectionId !== section.id
+                  }"
+                >
+                    <span class="font-medium">{{ section.title }}</span>
+                    <lucide-icon
+                        [name]="ChevronRight"
+                        class="h-4 w-4 transition-transform"
+                        [ngClass]="{ 'rotate-90': activeSectionId === section.id }"
+                    ></lucide-icon>
+
+                </button>
+            }
+        </div>
+
+        <!-- Content -->
+         @if (currentSection) {
+             <div class="border bg-gray-100/10 border-gray-300 inset-shadow-2xs rounded-md p-8">
+               <div class="animate-fade-in">
+                 <h2
+                   class="font-heading text-2xl font-bold text-foreground mb-6 decorative-border pt-6"
+                 >
+                   {{ currentSection.title }}
+                 </h2>
+     
+                 <div class="prose prose-lg max-w-none">
+                    @for (paragraph of currentSection.content.split('\n\n'); track $index) {
+                        <div class="mb-4">
+                            @for (line of paragraph.split('\n'); track $index) {
+                            <p
+                            
+                                class="text-muted-foreground leading-relaxed mb-2"
+                                [innerHTML]="formatLine(line)"
+                            ></p>
+                            }
+                        </div>
+                    }
+                 </div>
+               </div>
+             </div>
+         }
+
+      </div>
+    </div>
+  </main>
+</div>

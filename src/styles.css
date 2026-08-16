@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Theme variables */
+:root {
+  --foreground: 222.2 84% 4.9%;
+}
+
+.dark {
+  --foreground: 210 40% 98%;
+}
+
+/* Gradient gold */
+.gradient-gold-text {
+  background: linear-gradient(
+    90deg,
+    #fde047,
+    #facc15,
+    #eab308,
+    #ca8a04
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}

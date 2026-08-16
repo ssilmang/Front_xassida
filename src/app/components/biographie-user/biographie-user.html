@@ -1,0 +1,27 @@
+<div class="min-h-screen flex flex-col">
+  <main class="flex-1 py-12">
+    <div class="container">
+
+      <!-- Page Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-gray-900/10 flex text-green-900 items-center justify-center">
+            <ng-icon name="lucideBookMarked" class="h-6 w-6 text-green-900"></ng-icon>
+          </div>
+          <div>
+            <h1 class="font-heading text-3xl font-bold text-foreground">
+              Bibliographie
+            </h1>
+            <p class="text-green-900">
+              Références et documents religieux
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bibliography List -->
+       <app-biographie-card [bibliography]="bibliography"></app-biographie-card>
+
+    </div>
+  </main>
+</div>

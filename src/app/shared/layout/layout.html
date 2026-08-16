@@ -1,1 +1,13 @@
-<p>layout works!</p>
+<div class="flex w-full h-full items-start font-sans ">
+  <!-- <app-sidebar class="sidebar" aria-expanded="true"></app-sidebar> -->
+  <div class="flex-1 ">
+    <!-- Début de la navbar personnalisée -->
+    <app-navbar></app-navbar>
+    <!-- Fin de la navbar personnalisée -->
+    <main class="px-4 py-2">
+      <router-outlet></router-outlet>
+    </main>
+    <div class="mt-4">
+      <app-footer></app-footer> 
+  </div>
+</div>

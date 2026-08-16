@@ -1,0 +1,44 @@
+<a
+  [routerLink]="['/ecrivains', writer.id]"
+  class="card-spiritual p-6 block group"
+>
+  <div class="flex items-center gap-4">
+
+    <!-- Avatar -->
+    <!-- <div
+      class="w-16 h-16 bg-green-900 text-white rounded-full bg-gradient-to-br
+             from-primary to-emerald-light
+             flex items-center justify-center
+             text-primary-foreground
+             font-heading text-2xl font-bold
+             flex-shrink-0"
+    >
+      {{ initial }}
+    </div> -->
+    <div class="flex justify-end right-0">
+                <span class="relative flex justify-end size-10 border border-green-800 shrink-0 overflow-hidden rounded-full ring-[#2ca4ab] group-hovers:ring-2">
+                   <img class="aspect-square size-full"
+                       [src]="environment+ writer.image">
+               </span>
+            </div>
+
+    <!-- Content -->
+    <div class="flex-1 min-w-0">
+      <h3
+        class="font-heading text-lg font-semibold text-foreground
+               group-hover:text-primary transition-colors truncate"
+      >
+        {{ writer.nom_complet }}
+      </h3>
+
+      <!-- <p class="font-arabic text-base text-gold-warm " dir="rtl">
+        {{ writer.nameArabic }}
+      </p> -->
+
+      <div class="flex items-center   text-green-900 gap-2 mt-2 text-sm text-muted-foreground">
+        <lucide-icon [name]="BookOpen" class="h-4 w-4"></lucide-icon>
+        <span>{{ writer.xassidas }} Xassidas</span>
+      </div>
+    </div>
+  </div>
+</a>

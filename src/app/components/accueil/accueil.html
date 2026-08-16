@@ -1,0 +1,130 @@
+<div class="min-h-screen flex flex-col">
+  <!-- <app-header /> -->
+
+  <main class="flex-1">
+
+    <!-- HERO -->
+    <section class="relative py-24 bg-gradient-to-b from-muted/50 to-background">
+      <div class="absolute inset-0 islamic-pattern opacity-30"></div>
+
+      <div class="container relative text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/10 text-green-800 mb-6">
+          <lucide-icon [name]="icons.sparkles" class="h-4 w-4" />
+          Bibliothèque Spirituelle
+        </div>
+        <h1 class="text-5xl flex flex-col text-foreground md:text-6xl  font-bold mb-6">
+          Explorez la richesse des
+          <span class="gradient-gold-text"><span class="">Xassidas</span></span>
+        </h1>
+
+        <p class="text-xl text-muted-foreground text-green-800 max-w-2xl mx-auto mb-8">
+          Découvrez et méditez sur les poèmes spirituels des grands maîtres soufis.
+          Une bibliothèque numérique dédiée à la préservation du patrimoine religieux.
+        </p>
+
+        <div class="flex gap-4 justify-center">
+          <a routerLink="/xassidas" class="transform hover:scale-105 transition duration-300 px-6 bg-gradient-to-r from-green-800 to-green-600  p-2  text-white rounded-lg border flex items-center gap-2">
+            Explorer les Xassidas
+            <lucide-icon [name]="icons.arrow" class="h-5 w-5" />
+          </a>
+
+          <a routerLink="/tarikha" class="btn-outline transform hover:scale-105 transition duration-300 border border-gray-300 px-6  p-2 rounded-lg inset-shadow-2xs hover:bg-gradient-to-r hover:from-yellow-500 hover:to-yellow-300">
+            Découvrir le Tarikha
+          </a>
+        </div>
+         
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="py-12">
+      <div class="container">
+        <div class="flex  items-center justify-center flex-col mb-8">
+              <h2 class="font-heading text-3xl font-bold text-foreground mb-4">
+                Une plateforme complète
+              </h2>
+              <p class="text-green-800 max-w-2xl mx-auto">
+                Tout ce dont vous avez besoin pour approfondir votre connaissance spirituelle
+              </p>
+            </div>
+        <div class="grid md:grid-cols-4 gap-6">
+
+          @for (feature of features; track feature.title) {
+            <a
+              [routerLink]="feature.href"
+              class="transform hover:scale-105 transition duration-300 inset-shadow-2xs border border-gray-200 rounded-lg p-6 group animate-slide-up"
+            >
+              <div class="w-12 h-12 bg-gray/10 hover:bg-gray-300 rounded-lg border bg-gray-200 border-none flex items-center justify-center mb-4">
+                <lucide-icon [name]="feature.icon" class="h-6 w-6 text-green-800 " />
+              </div>
+
+              <h3 class="text-lg font-semibold mb-2">
+                {{ feature.title }}
+              </h3>
+
+              <p class="text-sm text-green-700  text-muted-foreground">
+                {{ feature.description }}
+              </p>
+            </a>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- XASSIDAS -->
+    <section class="py-6 bg-muted/30">
+      <div class="container grid md:grid-cols-2 gap-6">
+
+        <!-- @for (xassida of featuredXassidas(); track xassida.id) {
+          <app-xassida-card [xassida]="xassida" />
+        } -->
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="py-20 -ml-4 -mr-4 bg-green-900 text-primary-foreground text-center">
+      <div class="container grid md:grid-cols-3 gap-8">
+
+        <div class="text-white">
+          <div class="text-5xl text-white font-bold">
+            {{ xassidas().length }}+
+          </div>
+          <div class="opacity-80">Xassidas disponibles</div>
+        </div>
+
+        <div class="text-white">
+          <div class="text-5xl font-bold">
+            {{ writers().length }}
+          </div>
+          <div class="opacity-80">Écrivains référencés</div>
+        </div>
+
+        <div class="text-white">
+          <div class="text-5xl font-bold">
+            {{ events().length }}
+          </div>
+          <div class="opacity-80">Événements à venir</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20  text-center">
+      <h2 class="text-4xl font-bold mb-4">
+        Commencez votre voyage spirituel
+      </h2>
+
+      <a routerLink="/xassidas" class=" mt-4
+        bg-gradient-to-r from-yellow-500 to-yellow-300
+      rounded-lg p-3 items-center inline-flex gap-2 transform hover:scale-105 transition duration-300 ">
+        Commencer la lecture
+        <lucide-icon [name]="icons.book" class="h-5 w-5" />
+      </a>
+    </section>
+
+  </main>
+
+  <!-- <app-footer /> -->
+</div>

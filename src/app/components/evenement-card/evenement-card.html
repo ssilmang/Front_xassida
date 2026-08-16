@@ -1,0 +1,51 @@
+<div class="card-spiritual border bg-white border-gray-300 inset-shadow-2xs rounded-[10px] transform hover:scale-105 transition duration-300  overflow-hidden">
+  <!-- Header -->
+  <div
+    class="h-32 bg-gradient-to-br from-green-900/90 via-emerald-900/80 to-yellow-600/50
+           flex items-center justify-center islamic-pattern"
+  >
+    <lucide-icon
+      [name]="Calendar"
+      class="h-12 w-12 text-white"
+    ></lucide-icon>
+  </div>
+
+  <!-- Content -->
+  <div class="p-6  ">
+    <h3
+      class="font-heading text-xl font-semibold text-foreground mb-3"
+    >
+      {{ event.titre }}
+    </h3>
+
+    <div class="space-y-2 text-sm text-green-900 mb-4">
+      <div class="flex items-center gap-2">
+        <lucide-icon
+          [name]="Calendar"
+          class="h-4 w-4 text-yellow-600"
+        ></lucide-icon>
+        <span >{{ formatDate(event.date) }}</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <lucide-icon
+          [name]="Clock"
+          class="h-4 w-4 text-yellow-600"
+        ></lucide-icon>
+        <span>{{ event.time_debut }} - {{ event.time_fin }}</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <lucide-icon
+          [name]="MapPin"
+          class="h-4 w-4 text-yellow-600"
+        ></lucide-icon>
+        <span>{{ event.place }}</span>
+      </div>
+    </div>
+
+    <p class="text-sm text-green-900 line-clamp-3">
+      {{ event.programme }}
+    </p>
+  </div>
+</div>

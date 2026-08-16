@@ -1,0 +1,34 @@
+<div class="min-h-screen flex flex-col">
+  <!-- Main -->
+  <main class="flex-1 py-12">
+    <div class="container">
+      <!-- Page Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-lg bg-gray-800/10 text-green-900 flex items-center justify-center">
+            <lucide-icon [name]="Users" class="h-6 w-6 text-primary"></lucide-icon>
+          </div>
+          <div>
+            <h1 class="font-heading text-3xl font-bold text-foreground">
+              Les Écrivains
+            </h1>
+            <p class="text-muted-foreground">
+              Découvrez les auteurs de nos Xassidas
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Writers Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (writer of writers(); track $index) {
+          <div 
+            class="transform hover:scale-105 transition rounded-lg duration-300 inset-shadow-2xs border border-gray-300 "
+            [style.animationDelay]="getAnimationDelay($index)">
+            <app-writer-card [writer]="writer"></app-writer-card>
+          </div>
+        }
+      </div>
+    </div>
+  </main>
+</div>
